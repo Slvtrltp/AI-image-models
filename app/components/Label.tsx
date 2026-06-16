@@ -8,8 +8,8 @@ export const Label = ({
 }: {
   img: ReactNode;
   label: string;
-  reload: boolean;
-  isActive: boolean;
+  reload?: boolean;
+  isActive?: boolean;
 }) => {
   return (
     <div className="flex justify-between">
