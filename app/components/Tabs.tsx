@@ -1,26 +1,30 @@
 "use client";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 
-export const Tabs = () => {
-  const pathname = usePathname();
+export const Tabs = ({
+  activeTab,
+  setActiveTab,
+}: {
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+}) => {
   const tabs = [
-    { name: "  Image analysis", href: "/" },
-    { name: "  Ingredient recognition", href: "/trigger-ing" },
-    { name: "  Image creator", href: "/trigger-crt" },
+    { name: "Image analysis", key: "analysis" },
+    { name: "Ingredient recognition", key: "ingredient" },
+    { name: "Image creator", key: "creator" },
   ];
+
   return (
-    <div className="p-1 bg-[#F4F4F5] flex rounded-md items-center ">
+    <div className="p-1 bg-[#F4F4F5] flex rounded-md items-center">
       {tabs.map((tab) => {
-        const isActive = pathname === tab.href;
+        const isActive = activeTab === tab.key;
         return (
-          <Link
-            key={tab.href}
-            href={tab.href}
-            className={` ${isActive ? "py-1 px-3 bg-white rounded-md" : "py-1 px-3"}`}
+          <button
+            key={tab.key}
+            onClick={() => setActiveTab(tab.key)}
+            className={`${isActive ? "py-1 px-3 bg-white rounded-md" : "py-1 px-3 text-[#71717A]"}`}
           >
             {tab.name}
-          </Link>
+          </button>
         );
       })}
     </div>
