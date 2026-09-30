@@ -1,27 +1,34 @@
 "use client";
 
+export type TabId = "analysis" | "ingredient" | "creator";
+
+const tabs: { id: TabId; name: string }[] = [
+  { id: "analysis", name: "Image analysis" },
+  { id: "ingredient", name: "Ingredient recognition" },
+  { id: "creator", name: "Image creator" },
+];
+
 export const Tabs = ({
   activeTab,
-  setActiveTab,
+  onChange,
 }: {
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
+  activeTab: TabId;
+  onChange: (id: TabId) => void;
 }) => {
-  const tabs = [
-    { name: "Image analysis", key: "analysis" },
-    { name: "Ingredient recognition", key: "ingredient" },
-    { name: "Image creator", key: "creator" },
-  ];
-
   return (
-    <div className="p-1 bg-[#F4F4F5] flex rounded-md items-center">
+    <div className="grid grid-cols-3 items-center rounded-md bg-[#F4F4F5] p-1">
       {tabs.map((tab) => {
-        const isActive = activeTab === tab.key;
+        const isActive = activeTab === tab.id;
         return (
           <button
-            key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
-            className={`${isActive ? "py-1 px-3 bg-white rounded-md" : "py-1 px-3 text-[#71717A]"}`}
+            key={tab.id}
+            type="button"
+            onClick={() => onChange(tab.id)}
+            className={
+              isActive
+                ? "rounded-md bg-black px-2 py-2 text-sm text-white sm:px-3 sm:py-1 sm:text-base"
+                : "rounded-md px-2 py-2 text-sm text-[#71717A] sm:px-3 sm:py-1 sm:text-base"
+            }
           >
             {tab.name}
           </button>

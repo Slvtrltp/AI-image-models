@@ -5,11 +5,13 @@ export const Label = ({
   label,
   reload,
   isActive,
+  onReload,
 }: {
   img: ReactNode;
   label: string;
   reload?: boolean;
   isActive?: boolean;
+  onReload?: () => void;
 }) => {
   return (
     <div className="flex justify-between">
@@ -18,7 +20,10 @@ export const Label = ({
         <p className="text-[20px] font-semibold">{label}</p>
       </div>
       {reload && (
-        <div
+        <button
+          type="button"
+          onClick={onReload}
+          aria-label="Reset"
           className={`w-9 h-9 flex justify-center items-center rounded-md ${isActive ? "bg-black " : "border border-[#E4E4E7] "}`}
         >
           <svg
@@ -34,7 +39,7 @@ export const Label = ({
               stroke={`${isActive ? "#fff" : "#8B8B8D"}`}
             />
           </svg>
-        </div>
+        </button>
       )}
     </div>
   );
